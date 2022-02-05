@@ -13,6 +13,11 @@ public class ChatServer implements Runnable{
         serverSocket = new ServerSocket( 1234);
     }
 
+    public void sendAll(String message) {
+        for (Client client : clients) {
+            client.receive(message);
+        }
+    }
     @Override
     public void run() {
         while (true){
@@ -22,7 +27,7 @@ public class ChatServer implements Runnable{
                 Socket socket = serverSocket.accept();
                 System.out.println("Client connected!");
                 //создаем клиента из сети
-                clients.add(new Client(socket));
+                clients.add(new Client(socket, this));
             } catch (IOException e) {
                 e.printStackTrace();
             }
