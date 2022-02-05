@@ -23,7 +23,11 @@ public class EchoServer {
         PrintStream out = new PrintStream(os);
 
         //читаем из сети и пишем в сеть
-        out.println("What`s your name?");
-        out.println("Hello, " + in.nextLine());
+        out.println("Welcome, friend!");
+        String input = in.nextLine();
+        while (!(input.equals("bye"))) {
+            out.println(input + "-" + input + "-" + input.substring(input.length()/2) + "...");
+            input = in.nextLine();
+        }
     }
 }
